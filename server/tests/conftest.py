@@ -1,6 +1,8 @@
 import os
 import shutil
+import socket
 import subprocess
+import time
 from pathlib import Path
 
 import boto3
@@ -16,14 +18,23 @@ from app import app
 def client():
     # Load dump
     with app.app_context():
-        subprocess.check_output(
-            "export PGPASSWORD={}; pg_restore --no-privileges --no-owner -h {} -p {} -U {} -d {} --format=c --clean -j 4 ../tests/dumps/localcrag_test_dump.sql".format(
-                current_app.config['TEST_POSTGRES_PASSWORD'],
-                current_app.config['TEST_POSTGRES_HOST'],
-                current_app.config['TEST_POSTGRES_PORT'],
-                current_app.config['TEST_POSTGRES_ROLE'],
-                current_app.config['TEST_POSTGRES_DBNAME'],
-            ), shell=True)
+        if os.getenv("DOCKER") is None:
+            subprocess.check_output(
+                "export PGPASSWORD={}; pg_restore --no-privileges --no-owner -h {} -p {} -U {} -d {} --format=c --clean -j 4 ../tests/dumps/localcrag_test_dump.sql".format(
+                    current_app.config['TEST_POSTGRES_PASSWORD'],
+                    current_app.config['TEST_POSTGRES_HOST'],
+                    current_app.config['TEST_POSTGRES_PORT'],
+                    current_app.config['TEST_POSTGRES_ROLE'],
+                    current_app.config['TEST_POSTGRES_DBNAME'],
+                ), shell=True)
+        else:
+            # A script on the database container listens for UDP packets and restores the test database on any incoming packet
+            db_host = current_app.config['SQLALCHEMY_DATABASE_URI'].split('@', 1)[-1].split('/', 1)[0]
+            target_port = current_app.config['TEST_DOCKER_SETUP_DB_PORT']
+            sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            sock.sendto(b"restore", (db_host, target_port))
+            time.sleep(3)  # this will take shortly
+            sock.close()
 
     # Return client
     return app.test_client()
