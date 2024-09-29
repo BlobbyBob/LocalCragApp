@@ -1,5 +1,6 @@
 import datetime
 import uuid
+from typing import Self
 
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import declared_attr
@@ -29,7 +30,7 @@ class BaseEntity(db.Model):
         return db.relationship('User', foreign_keys='[%s.created_by_id]' % self.__name__)
 
     @classmethod
-    def return_all(cls, order_by=None, options=None, filter=None):
+    def return_all(cls, order_by=None, options=None, filter=None) -> list[Self]:
         query = cls.query
         if options:
             query = query.options(options)
@@ -49,7 +50,7 @@ class BaseEntity(db.Model):
         return query.all()
 
     @classmethod
-    def find_by_id(cls, id):
+    def find_by_id(cls, id) -> Self:
         entity = cls.query.filter_by(id=id).first()
 
         if not entity:
@@ -58,7 +59,7 @@ class BaseEntity(db.Model):
         return entity
 
     @classmethod
-    def find_by_slug(cls, slug):
+    def find_by_slug(cls, slug) -> Self:
         entity = cls.query.filter_by(slug=slug).first()
 
         if not entity:
