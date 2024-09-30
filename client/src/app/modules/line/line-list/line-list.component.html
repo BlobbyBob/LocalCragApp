@@ -93,6 +93,7 @@
                             (click)="openVideo($event, line)" class="video-button" *ngIf="line.videos?.length > 0">
                   </p-button>
                   <div class="flex-grow-1"></div>
+                  <lc-archive-button [line]="line" [showLabel]="false" *isModerator="true"></lc-archive-button>
                   <ng-container *ngIf="!ticks.has(line.id)">
                     <lc-todo-button [line]="line" [isTodo]="isTodo.has(line.id)" *isLoggedIn="true"></lc-todo-button>
                   </ng-container>
