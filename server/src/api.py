@@ -1,6 +1,6 @@
 from flask import Blueprint
 
-from resources.archive_resources import UpdateArchived, ArchiveArea, ArchiveSector, ArchiveCrag
+from resources.archive_resources import ArchiveArea, ArchiveSector, ArchiveCrag
 from resources.area_resources import GetAreas, CreateArea, DeleteArea, UpdateArea, GetArea, UpdateAreaOrder, \
     GetAreaGrades
 from resources.ascent_resources import CreateAscent, GetAscents, GetTicks, DeleteAscent, UpdateAscent
