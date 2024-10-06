@@ -34,6 +34,7 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {SecretSpotTagComponent} from '../shared/components/secret-spot-tag/secret-spot-tag.component';
 import {MapMarkerFormArrayComponent} from '../maps/map-marker-form-array/map-marker-form-array.component';
 import {MapComponent} from '../maps/map/map.component';
+import {ArchiveButtonComponent} from '../archive/archive-button/archive-button.component';
 
 
 /**
@@ -46,38 +47,39 @@ import {MapComponent} from '../maps/map/map.component';
     CragComponent,
     CragInfoComponent
   ],
-    imports: [
-        CommonModule,
-        CardModule,
-        TranslocoModule,
-        SharedModule,
-        InputTextModule,
-        FormsModule,
-        ReactiveFormsModule,
-        InputTextareaModule,
-        ButtonModule,
-        DataViewModule,
-        TagModule,
-        BadgeModule,
-        RouterLink,
-        DropdownModule,
-        MessagesModule,
-        EditorModule,
-        TabMenuModule,
-        ConfirmPopupModule,
-        SectorModule,
-        SkeletonModule,
-        BreadcrumbModule,
-        GradeDistributionBarChartComponent,
-        CoordinatesComponent,
-        CoordinatesButtonComponent,
-        HasPermissionDirective,
-        AscentCountComponent,
-        CheckboxModule,
-        SecretSpotTagComponent,
-        MapMarkerFormArrayComponent,
-        MapComponent
-    ],
+  imports: [
+    CommonModule,
+    CardModule,
+    TranslocoModule,
+    SharedModule,
+    InputTextModule,
+    FormsModule,
+    ReactiveFormsModule,
+    InputTextareaModule,
+    ButtonModule,
+    DataViewModule,
+    TagModule,
+    BadgeModule,
+    RouterLink,
+    DropdownModule,
+    MessagesModule,
+    EditorModule,
+    TabMenuModule,
+    ConfirmPopupModule,
+    SectorModule,
+    SkeletonModule,
+    BreadcrumbModule,
+    GradeDistributionBarChartComponent,
+    CoordinatesComponent,
+    CoordinatesButtonComponent,
+    HasPermissionDirective,
+    AscentCountComponent,
+    CheckboxModule,
+    SecretSpotTagComponent,
+    MapMarkerFormArrayComponent,
+    MapComponent,
+    ArchiveButtonComponent
+  ],
   providers: [
     {provide: TRANSLOCO_SCOPE, useValue: 'crag'}
   ],

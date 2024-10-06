@@ -42,8 +42,10 @@
             <div
               class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
               <div class="flex flex-column align-items-center sm:align-items-start gap-3 w-full">
-                <span class="text-2xl font-bold black-font">{{ crag.name }}
-                </span>
+                <div class="flex justify-content-between w-full">
+                  <span class="text-2xl font-bold black-font">{{ crag.name }}</span>
+                  <lc-archive-button *isModerator="true" [showLabel]="true" [crag]="crag"></lc-archive-button>
+                </div>
                 <div [innerHTML]="crag.shortDescription | sanitizeHtml" *ngIf="crag.shortDescription"  class="quill-content"></div>
                 <lc-leveled-grade-distribution
                   [fetchingObservable]="cragsService.getCragGrades(crag.slug)"></lc-leveled-grade-distribution>
