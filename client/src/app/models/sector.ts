@@ -23,6 +23,7 @@ export class Sector extends AbstractModel {
   ascentCount: number;
   routerLink: string;
   secret: boolean;
+  archived?: boolean;
   mapMarkers: MapMarker[];
 
 
@@ -63,6 +64,7 @@ export class Sector extends AbstractModel {
       description: sector.description,
       shortDescription: sector.shortDescription,
       secret: sector.secret,
+      archived: sector.archived,
       portraitImage: sector.portraitImage ? sector.portraitImage.id : null,
       rules: sector.rules,
       mapMarkers: sector.mapMarkers ? sector.mapMarkers.map(MapMarker.serialize) : null,
